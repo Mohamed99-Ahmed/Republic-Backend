@@ -9,7 +9,7 @@ const ApiError = require("../utils/apiError");
 const Order = require("../models/orderModel");
 const { crossOriginEmbedderPolicy } = require("helmet");
 // استخدام مفتاح API من متغيرات البيئة بدلاً من تضمينه مباشرة في الكود
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KE);
 // checkout session in stripe
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   // 1) get cart from param
@@ -19,7 +19,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     // information about session
     payment_method_types: ["card"],
     mode: "payment",
-    success_url: `https://backend-three-nu-89.vercel.app/order?cart=${req.params.cartId}&user=${req.user.id}&price=${cart.totalPrice}`, // if success make this success link that i will use it to go it and make order in database
+    success_url: `https://republic-backend.vercel.app/order?cart=${req.params.cartId}&user=${req.user.id}&price=${cart.totalPrice}`, // if success make this success link that i will use it to go it and make order in database
     cancel_url: `${req.headers.origin}/cart`, // if not success (cancel order) // ${req.headers.origin}/cart
     customer_email: req.user.email, // cusotomer that make order
     client_reference_id: req.params.cartId,
